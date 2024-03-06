@@ -5,6 +5,7 @@ import { BsInfoCircle } from 'react-icons/bs';
 
 import { TransactionContext } from '../context/TransactionContext';
 import { Loader } from './';
+import { shorten } from '../utils/shorten';
 
 // 'mf' is a custom variable that we are expanding from TailWind, Check tailwind.config for more info.
 
@@ -26,7 +27,7 @@ const Welcome = () => {
 
     const handleSubmit = (e) => {
         const { addressTo, amount, keyword, message } = formData;
-        
+
         // Preventing page reload after submitting form
         e.preventDefault();
 
@@ -86,7 +87,7 @@ const Welcome = () => {
                             </div>
                             <div>
                                 <p className='text-white font-light text-sm'>
-                                    Address
+                                    {shorten(connectedAccount)}
                                 </p>
                                 <p className='text-white font-semibold text-lg mt-1'>
                                     Ethereum
@@ -112,7 +113,6 @@ const Welcome = () => {
                                 Send Now
                             </button>)}
                     </div>
-
                 </div>
             </div>
         </div>
