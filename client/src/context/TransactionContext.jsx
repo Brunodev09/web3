@@ -26,9 +26,33 @@ export const TransactionProvider = ({ children }) => {
     const [formData, setFormData] = useState({ addressTo: '', amount: '', keyword: '', message: '' });
     const [isLoading, setisLoading] = useState(false);
     const [count, setCount] = useState(localStorage.getItem('count'));
+    const [transactions, setTransactions] = useState([]);
 
     const handleChange = (e, name) => {
         setFormData((prevProps) => ({ ...prevProps, [name]: e.target.value }))
+    }
+
+    const getAllTransactions = async () => {
+        try {
+            if (!ethereum) return alert('Please install Metamask to enjoy Web3.0!');
+            const tContract = getETHContract();
+            const avTransactions = await tContract.getAll();
+
+            const structTransactions = avTransactions.map(transaction => ({
+                addressTo: transaction.receiver,
+                addressFrom: transaction.sender,
+                timestamp: new Date(transaction.timestamp.toNumber() * 1000).toLocaleString(),
+                message: transaction.message,
+                keyword: transaction.keyword,
+                amount: parseInt(transaction.amount._hex) / (10 ** 18)
+            }));
+
+            setTransactions(structTransactions);
+            console.log(structTransactions);
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const checkWalletConnection = async () => {
@@ -38,6 +62,7 @@ export const TransactionProvider = ({ children }) => {
             const accounts = await ethereum.request({ method: 'eth_accounts' });
             if (accounts.length) {
                 setConnectedAccount(accounts[0]);
+                await getAllTransactions();
             } else {
                 console.log('No MetaMask accounts found!');
             }
@@ -51,6 +76,19 @@ export const TransactionProvider = ({ children }) => {
             if (!ethereum) return alert('Please install Metamask to enjoy Web3.0!');
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
             setConnectedAccount(accounts[0]);
+        } catch (error) {
+            console.log(error);
+            throw new Error(`No ETH object found in context!`);
+        }
+    }
+
+    const checkIfTransactionExists = async () => {
+        try {
+            const tContract = getETHContract();
+            const tCount = await tContract.getCount();
+
+            window.localStorage.setItem("count", tCount);
+            
         } catch (error) {
             console.log(error);
             throw new Error(`No ETH object found in context!`);
@@ -99,10 +137,20 @@ export const TransactionProvider = ({ children }) => {
 
     useEffect(() => {
         checkWalletConnection();
+        checkIfTransactionExists();
     }, []);
 
     return (
-        <TransactionContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, send, isLoading }}>
+        <TransactionContext.Provider value={{ 
+                connectWallet, 
+                connectedAccount, 
+                formData, 
+                setFormData, 
+                handleChange, 
+                send, 
+                isLoading,
+                transactions
+            }}>
             {children}
         </TransactionContext.Provider>
     );
