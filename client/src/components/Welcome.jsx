@@ -44,7 +44,7 @@ const Welcome = () => {
                         Experiment the Web3.0 <br /> technology across the planet
                     </h1>
                     <p className='text-left mt-5 text-white font-light md:w9/12 w-11/12 text-base'>
-                        Explore the crypto world. Buy and sell cryptocurrencies
+                        Explore the crypto world. Virtual broker
                     </p>
                     {!connectedAccount && (
                         <button
