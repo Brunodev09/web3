@@ -41,10 +41,10 @@ const Welcome = () => {
             <div className='flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4'>
                 <div className='flex flex-1 justify-start flex-col mf:mr-10'>
                     <h1 className='text-3xl sm:text-5xl text-white text-gradient py-1'>
-                        Send Crypto <br /> across the globe
+                        Experiment the Web3.0 <br /> technology across the planet
                     </h1>
                     <p className='text-left mt-5 text-white font-light md:w9/12 w-11/12 text-base'>
-                        Explore the crypto world. Buy and sell cryptocurrencies easily
+                        Explore the crypto world. Buy and sell cryptocurrencies
                     </p>
                     {!connectedAccount && (
                         <button
@@ -68,7 +68,7 @@ const Welcome = () => {
                             Web 3.0
                         </div>
                         <div className={commonStyles}>
-                            Low fees
+                            Standard fees
                         </div>
                         <div className={`rounded-br-2xl ${commonStyles}`}>
                             Blockchain

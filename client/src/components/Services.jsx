@@ -20,7 +20,7 @@ const Services = () => {
         <div className='flex flex-col md:flex-row w-full justify-center items-center gradient-bg-services'>
             <div className='flex mf:flex-row flex-col items-center justify-between md:p-20 py-12 px-4'>
                 <div className='flex-1 flex flex-col justify-start items-start'>
-                    <h1 className='text-white text-3xl sm:text-5xl py-2 text-gradient'>Services that we
+                    <h1 className='text-white text-3xl sm:text-5xl py-2 text-gradient'>Tech that we
                         <br />
                         continue to improve
                     </h1>
@@ -37,13 +37,13 @@ const Services = () => {
                     color='bg-[#8945f8]'
                     title='Great exchange rates'
                     icon={<BiSearchAlt fontSize={21} className='text-white' />}
-                    subtitle='Security is our first priority. We always maintain privacy and maintain the quality of our products'
+                    subtitle='We keep our rates as low as possible to maximise our clients usability and quality of our services'
                 />
                 <ServiceCard
                     color='bg-[#f84550]'
                     title='Fast transactions'
                     icon={<RiHeart2Fill fontSize={21} className='text-white' />}
-                    subtitle='Security is our first priority. We always maintain privacy and maintain the quality of our products'
+                    subtitle='Transactions as fast as GWEI allows it, all across the world. Burn the gas and check your balance'
                 />
             </div>
         </div>
